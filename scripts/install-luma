@@ -62,6 +62,17 @@ sudo -u ${MAGENTO_USER} bin/magento deploy:mode:set developer
 # the cache to lose that setting.
 sudo -u ${MAGENTO_USER} rm -rf var/cache
 
+
+#sudo -u ${MAGENTO_USER} composer config repositories.temando-module vcs git@src.temando.io:magento/shipping-m2.git
+#sudo -u ${MAGENTO_USER} composer config repositories.temando-api vcs git@src.temando.io:magento/shipping-api-rest.git
+#sudo -u ${MAGENTO_USER} composer require temando/module-shipping-m2:dev-master temando/shipping-api-rest:dev-master
+sudo -u ${MAGENTO_USER} composer update
+#sudo -u ${MAGENTO_USER} php bin/magento module:enable Temando_Shipping
+sudo -u ${MAGENTO_USER} php bin/magento setup:upgrade
+sudo -u ${MAGENTO_USER} php bin/magento cache:flush
+sudo -u ${MAGENTO_USER} php bin/magento setup:di:compile
+
+
 sleep 5
 
 # Stop MySQL gracefully
